@@ -1,56 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8" />
+    <title>ChatGPT Chatbot</title>
+    <script src="https://cdn.jsdelivr.net/npm/@openai/chat-iframe@1.0.0/dist/chat-iframe.min.js"></script>
+
   <link rel="stylesheet" href="styles.css">
 
-  <script>
-  const chatApi = new OpenAI({
-    apiKey: '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'
-  });
-  const chatContainer = document.getElementById('chat-container');
-  const chatInput = document.getElementById('chat-input');
-  
-  function sendMessage() {
-    const message = chatInput.value;
-    chatInput.value = '';
-    
-    chatApi.complete({
-      prompt: message,
-      maxTokens: 60,
-      n: 1,
-      stop: '\n',
-    }).then((result) => {
-      const chatText = result.choices[0].text;
-      appendMessage(message, 'user');
-      appendMessage(chatText, 'bot');
-    });
-  }
-  
-  function appendMessage(message, sender) {
-    const messageElem = document.createElement('div');
-    messageElem.className = `message ${sender}`;
-    messageElem.innerText = message;
-    chatContainer.appendChild(messageElem);
-  }
-    
-</script>
+
 </head>  
 <body>
 <div class="video-container">
   <iframe src="https://www.youtube.com/embed/iitZBAUFzq8?controls=0&autoplay=1&mute=1&playsinline=1&loop=1&playlist=iitZBAUFzq8"></iframe>
 </div>
 
-<div id="text">
-  <h1>OBLACI.TECH is under construction</h1>
-  <h1>Сайтът на ОБЛАЦИ ЕООД е в процес на разработка</h1>
-</div>
-  <p> Поговори си с мен:</p>
-  <br><br>
-<div id="chat-container"></div>
-<div id="input-container">
-  <input id="chat-input" type="text" placeholder="Type your message...">
-  <button id="send-button" onclick="sendMessage()">Send</button>
-</div>
+  
+<body>
+   
+  <div id="text">
+    <h1>OBLACI.TECH is under construction</h1>
+    <h1>Сайтът на ОБЛАЦИ ЕООД е в процес на разработка</h1>
+  </div>
+  
+    <h1>Chat with our helpdesk</h1>
+    <div id="chat"></div>
+    <script>
+      new OpenAIChat.default({
+        el: "#chat",
+        agentId: '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',
+        // Optional parameters
+        title: "Chat with us",
+        subtitle: "We're real humans",
+        description: "Feel free to ask any questions you may have",
+        welcomeMessage: "Hello! How can I help you today?",
+        apiEndpoint: "https://api.openai.com/v1",
+        chatHeight: "400px",
+        chatWidth: "100%",
+        backgroundColor: "#f7f7f7",
+        foregroundColor: "#212121",
+        placeholderText: "Type your message here...",
+        useBuiltInStyles: true,
+        showAgentAvatar: true,
+        showUserAvatar: true,
+        conversationId: null,
+        user: {
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        },
+      });
+    </script>
+
+
+
+  
+  
+
+
 
 </body>
 </html>
